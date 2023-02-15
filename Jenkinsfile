@@ -1,11 +1,11 @@
 pipeline{
     agent any
    tools {
-       maven 'maven'
-       jdk 'Java'
+       maven 'mymaven'
+       jdk 'myjava'
    }
     environment {
-        dockerhub=credentials('dockerhub')
+        dockerhub=credentials('mydockerhub')
         
     }
     stages{
@@ -49,7 +49,7 @@ pipeline{
                 }
             steps{
 
-                sh 'docker build -t naincykumari123/capstone:${GIT_COMMIT} . '
+                sh 'docker build -t sairam1/sairam:${GIT_COMMIT} . '
             }
         } 
         stage('pushing to dockerhub')
@@ -61,7 +61,7 @@ pipeline{
 
                 sh '''
                 echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin
-                docker push naincykumari123/capstone:${GIT_COMMIT} 
+                docker push sairam1/sairam:${GIT_COMMIT} 
                 docker logout
                 '''
             }
